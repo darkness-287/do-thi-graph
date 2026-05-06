@@ -4,9 +4,9 @@ from copy import deepcopy
 import networkx as nx
 import matplotlib.pyplot as plt
 
-adj      = {}        
-directed = False     
-capacity = {}        
+adj      = {}
+directed = False
+capacity = {}
 
 #  THÊM ĐỈNH / CẠNH
 def them_dinh(u):
@@ -18,8 +18,10 @@ def them_dinh(u):
 
 
 def them_canh(u, v):
-    if u not in adj: adj[u] = []
-    if v not in adj: adj[v] = []
+    if u not in adj:
+        adj[u] = []
+    if v not in adj:
+        adj[v] = []
 
     if v not in adj[u]:
         adj[u].append(v)
@@ -35,8 +37,10 @@ def them_canh(u, v):
 
 def them_canh_trong_so(u, v, w):
     
-    if u not in adj: adj[u] = []
-    if v not in adj: adj[v] = []
+    if u not in adj:
+        adj[u] = []
+    if v not in adj:
+        adj[v] = []
 
     adj[u].append((w, v))
     if not directed:
@@ -47,8 +51,10 @@ def them_canh_trong_so(u, v, w):
 
 def them_canh_suc_chua(u, v, cap):
 
-    if u not in adj: adj[u] = []
-    if v not in adj: adj[v] = []
+    if u not in adj:
+        adj[u] = []
+    if v not in adj:
+        adj[v] = []
 
     if v not in adj[u]:
         adj[u].append(v)
@@ -240,7 +246,7 @@ def kiem_tra_2_phia():
         print(" Đồ thị đang trống!")
         return
 
-    mau = {}   
+    mau = {}
 
     for dinh_bat_dau in adj:
         if dinh_bat_dau in mau:
@@ -408,8 +414,7 @@ def fleury():
         print(f" {buoc:<8}{ten_canh:<20}{ten_duong:<35}{con_lai}")
 
         current = chon
-
-    print(f"\n  Kết quả:")
+    print("\n Kết quả:")
     print("   " + " → ".join(str(x) for x in duong_di) + "\n")
 
 #  HIERHOLZER (chu trình Euler)
@@ -548,16 +553,16 @@ def luu_do_thi():
     print(f" Đã lưu đồ thị vào file '{ten_file}'\n")
 
 
- # PHẦN 1: Vẽ đồ thị 
+ # PHẦN 1: Vẽ đồ thị
 def ve_do_thi(G, title="Đồ thị"):
     plt.figure(figsize=(10, 7))
     pos = nx.spring_layout(G, seed=42)
 
-    nx.draw(G, pos, with_labels=True, 
-            node_color='lightblue', 
-            node_size=800, 
-            font_size=10, 
-            font_weight='bold', 
+    nx.draw(G, pos, with_labels=True,
+            node_color='lightblue',
+            node_size=800,
+            font_size=10,
+            font_weight='bold',
             edge_color='gray')
 
     edge_labels = nx.get_edge_attributes(G, 'weight')
@@ -568,7 +573,7 @@ def ve_do_thi(G, title="Đồ thị"):
     plt.show()
 
 
-# PHẦN 3: Đường đi ngắn nhất 
+# PHẦN 3: Đường đi ngắn nhất
 def tim_duong_ngan_nhat(G, start, goal):
     try:
         path = nx.shortest_path(G, start, goal, weight='weight')
@@ -583,7 +588,7 @@ def tim_duong_ngan_nhat(G, start, goal):
         return None
 
 
-#  PHẦN 7.2: Kruskal 
+#  PHẦN 7.2: Kruskal
 def kruskal(G):
     mst = nx.minimum_spanning_tree(G, algorithm='kruskal')
 
@@ -594,10 +599,10 @@ def kruskal(G):
     plt.figure(figsize=(10, 7))
     pos = nx.spring_layout(G, seed=42)
 
-    nx.draw(G, pos, with_labels=True, node_color='lightgray', 
+    nx.draw(G, pos, with_labels=True, node_color='lightgray',
             edge_color='lightgray', alpha=0.3)
 
-    nx.draw(mst, pos, with_labels=True, node_color='lightblue', 
+    nx.draw(mst, pos, with_labels=True, node_color='lightblue',
             edge_color='red', width=3, font_weight='bold')
 
     edge_labels = nx.get_edge_attributes(mst, 'weight')
